@@ -22,7 +22,7 @@ export const TwoPlayers = () => {
             backgroundPosition: "center",
           }}
         >
-          <CounterIndividual direction="vertical" inverse={false} />
+          <CounterIndividual direction="vertical" inverse={false} player={1}/>
         </Stack>
         <Bar />
         <Stack
@@ -37,7 +37,7 @@ export const TwoPlayers = () => {
             backgroundPosition: "center",
           }}
         >
-          <CounterIndividual direction="vertical" inverse />
+          <CounterIndividual direction="vertical" inverse player={2} />
         </Stack>
       </Stack>
     </>

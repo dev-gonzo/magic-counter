@@ -1,11 +1,12 @@
 import { Dispatch, SetStateAction } from "react";
+import { InfoPlayer } from "../types";
 
 export type Layers = "life" | "commanderDamage";
 
 export type Direction = "horizontal" | "vertical";
 
 export type Counter = {
-  life: number;
+  player: InfoPlayer;
   addLife: () => void;
   minusLife: () => void;
   pressAdd: () => void;
@@ -16,7 +17,6 @@ export type Counter = {
   setLayerView: Dispatch<SetStateAction<Layers>>;
   addCommanderDamage: (index: number) => void;
   minusCommanderDamage: (index: number) => void;
-  commanderDamage: number[];
   deathByCommander: boolean;
   playerDeath: boolean;
   revivePlayer: () => void;

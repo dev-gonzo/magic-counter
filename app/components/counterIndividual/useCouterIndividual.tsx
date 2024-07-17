@@ -1,32 +1,47 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { checkDeathCommander } from "@/app/helpers/checkDeathCommander";
+import {
+  getRegistredPlayers,
+  updateRegistredPlayers,
+} from "@/app/helpers/registredPlayers";
+import { useEffect, useRef, useState } from "react";
 import { Layers } from "../types";
+import { checkDeath } from "@/app/helpers/checkDeath";
 
-export const useCouterIndividual = () => {
+export const useCouterIndividual = (playerNumber: number) => {
+  const infoPlayer = getRegistredPlayers(playerNumber);
+
+  const [player, setPlayer] = useState(infoPlayer);
+
   const [layerView, setLayerView] = useState<Layers>("life");
-  const [life, setLife] = useState(40);
   const addIntervalId = useRef<NodeJS.Timeout | null>(null);
   const timeoutId = useRef<NodeJS.Timeout | null>(null);
-  const [commanderDamage, setCommanderDamage] = useState<number[]>([
-    0, 0, 0, 0, 0, 0, 0, 0,
-  ]);
+
   const [playerDeath, setPlayerDeath] = useState(false);
 
   const revivePlayer = () => {
-    setPlayerDeath(false)
-  }
+    setPlayerDeath(false);
+  };
 
-  const deathByCommander = commanderDamage?.filter((item) => item === 21).length
-    ? true
-    : false;
+  const deathPlayer = () => {
+    setPlayerDeath(true);
+  };
+
+  const deathByCommander = checkDeathCommander(player?.commanderDamage);
 
   const addLife = () => {
-    setLife((prev) => ++prev);
+    setPlayer({
+      ...player,
+      life: player?.life + 1,
+    });
   };
 
   const minusLife = () => {
-    setLife((prev) => (prev === 0 ? 0 : --prev));
+    setPlayer({
+      ...player,
+      life: player?.life - 1,
+    });
   };
 
   const pressAdd = () => {
@@ -62,41 +77,49 @@ export const useCouterIndividual = () => {
   };
 
   const addCommanderDamage = (index: number) => {
-    const damage: number = commanderDamage[index] ?? 0;
-    if (damage < 21 && life) {
-      let damanges = [...commanderDamage];
+    const damage: number = player?.commanderDamage[index] ?? 0;
+    if (damage < 21 && player?.life) {
+      let damanges = [...player?.commanderDamage];
 
       damanges[index] = damage + 1;
 
       minusLife();
-      setCommanderDamage(damanges);
+      setPlayer({
+        ...player,
+        commanderDamage: damanges,
+      });
     }
   };
 
   const minusCommanderDamage = (index: number) => {
-    const damage: number = commanderDamage[index] ?? 0;
+    const damage: number = player?.commanderDamage[index] ?? 0;
     if (damage > 0) {
-      let damanges = [...commanderDamage];
+      let damanges = [...player?.commanderDamage];
 
       damanges[index] = damage - 1;
 
       addLife();
-      setCommanderDamage(damanges);
+      setPlayer({
+        ...player,
+        commanderDamage: damanges,
+      });
     }
   };
 
   useEffect(() => {
-    setTimeout(() => {
-      if(!life || deathByCommander){
-        setPlayerDeath(true)
-      }
-    }, 2000)
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [life, commanderDamage])
+    updateRegistredPlayers(player);
+  }, [player]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      checkDeath(playerNumber, deathPlayer);
+    }, 2000);
+  }, [player]);
+
 
   return {
-    life,
+    player,
     addLife,
     minusLife,
     pressAdd,
@@ -105,11 +128,10 @@ export const useCouterIndividual = () => {
     dropMinus,
     layerView,
     setLayerView,
-    commanderDamage,
     addCommanderDamage,
     minusCommanderDamage,
     deathByCommander,
     playerDeath,
-    revivePlayer
+    revivePlayer,
   };
 };

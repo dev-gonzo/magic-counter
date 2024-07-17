@@ -3,5 +3,6 @@ import { Counter, Direction } from "../types";
 export type Props = {
   counter: Counter;
   direction: Direction;
-  inverse?: boolean
+  inverse?: boolean;
+  player: number;
 };

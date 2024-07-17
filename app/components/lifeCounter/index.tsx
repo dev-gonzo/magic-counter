@@ -10,9 +10,9 @@ import { Counter } from "../types";
 import { FaVirus } from "react-icons/fa";
 import { Props } from "./types";
 
-export const LifeCounter = ({ counter, direction, inverse }: Props) => {
+export const LifeCounter = ({ counter, direction, inverse, player: numerPlayer }: Props) => {
   const {
-    life,
+    player,
     addLife,
     minusLife,
     pressAdd,
@@ -61,12 +61,12 @@ export const LifeCounter = ({ counter, direction, inverse }: Props) => {
             <Box>
               <Typography
                 variant="h1"
-                color={life && !deathByCommander ? "white" : "red"}
+                color={player?.life && !deathByCommander ? "white" : "red"}
                 fontWeight={"bold"}
                 fontFamily={"monospace"}
                 sx={{ textShadow: "2px 2px black" }}
               >
-                {life}
+                {player?.life}
               </Typography>
             </Box>
             <Box>
@@ -90,7 +90,7 @@ export const LifeCounter = ({ counter, direction, inverse }: Props) => {
             alignItems={"center"}
             gap={0.5}
           >
-            <FaVirus onClick={() => console.log("aaa")} />{" "}
+            <FaVirus  />{" "}
             <Typography variant="caption">2</Typography>
             <GiDiceShield
               onClick={() => setLayerView("commanderDamage")}

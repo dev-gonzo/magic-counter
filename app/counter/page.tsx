@@ -1,8 +1,15 @@
+'use client'
+
 import { Box, Stack } from "@mui/material";
 import { CounterIndividual } from "../components/counterIndividual";
 import { LayoutCounter } from "../components/layoutCounter";
+import { useEffect } from "react";
+import { registredPlayers } from "../helpers/registredPlayers";
 
 export default function Page() {
+  useEffect(() => {
+    registredPlayers();
+  }, []);
   return (
     <>
       <Stack
@@ -11,7 +18,6 @@ export default function Page() {
         flexDirection={"row"}
         flexWrap={"wrap"}
       >
-
         <LayoutCounter players={2} />
         {/* <CounterIndividual />
         <CounterIndividual />
@@ -21,7 +27,6 @@ export default function Page() {
         <CounterIndividual />
         <CounterIndividual />
         <CounterIndividual /> */}
-    
       </Stack>
     </>
   );
