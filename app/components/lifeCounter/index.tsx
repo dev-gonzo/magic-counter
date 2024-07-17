@@ -36,7 +36,7 @@ export const LifeCounter = ({ counter, direction, inverse, player: numerPlayer }
                 ? inverse
                   ? "rotate(270deg)"
                   : "rotate(90deg)"
-                : undefined,
+                : inverse ? "rotate(180deg)" : undefined,
           }}
         >
           <Stack

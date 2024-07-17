@@ -1,11 +1,10 @@
-import { ThreePlayers } from "./threePlayers";
-import { TwoPlayers } from "./twoPlayers";
+import { FourPlayers } from "./fourPlayers";
 import { Props } from "./types";
 
 export const LayoutCounter = ({ players = 2 }: Props) => {
   return (
     <>
-      <ThreePlayers />
+      <FourPlayers />
     </>
   );
 };
