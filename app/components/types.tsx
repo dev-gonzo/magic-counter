@@ -2,6 +2,8 @@ import { Dispatch, SetStateAction } from "react";
 
 export type Layers = "life" | "commanderDamage";
 
+export type Direction = "horizontal" | "vertical";
+
 export type Counter = {
   life: number;
   addLife: () => void;
@@ -17,5 +19,5 @@ export type Counter = {
   commanderDamage: number[];
   deathByCommander: boolean;
   playerDeath: boolean;
-  revivePlayer: () => void
+  revivePlayer: () => void;
 };

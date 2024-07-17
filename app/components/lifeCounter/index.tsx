@@ -2,12 +2,15 @@
 
 import { Box, Button, Stack, Typography } from "@mui/material";
 import { GiDiceShield } from "react-icons/gi";
-import { TbArrowBadgeDownFilled, TbArrowBadgeUpFilled } from "react-icons/tb";
+import {
+  TbArrowBadgeRightFilled,
+  TbArrowBadgeLeftFilled,
+} from "react-icons/tb";
 import { Counter } from "../types";
 import { FaVirus } from "react-icons/fa";
+import { Props } from "./types";
 
-
-export const LifeCounter = ({ counter }: { counter: Counter }) => {
+export const LifeCounter = ({ counter, direction, inverse }: Props) => {
   const {
     life,
     addLife,
@@ -17,56 +20,83 @@ export const LifeCounter = ({ counter }: { counter: Counter }) => {
     pressMinus,
     dropMinus,
     setLayerView,
-    deathByCommander
+    deathByCommander,
   } = counter;
 
-  console.log(deathByCommander)
   return (
     <>
-      <Stack
-        bgcolor={"blue"}
-        width={"25%"}
-        justifyContent={"center"}
-        alignItems={"center"}
-        border={"1px solid #fff"}
-      >
-        <Stack flexGrow={1} justifyContent={"center"} alignItems={"center"}>
-          <Box>
-            <Button
-              onClick={addLife}
-              onMouseDown={pressAdd}
-              onMouseUp={dropAdd}
-              onMouseLeave={dropAdd}
-            >
-              <TbArrowBadgeUpFilled size={40} />
-            </Button>
-          </Box>
-          <Box>
-            <Typography variant="h3" color={life && !deathByCommander ? undefined : "red"}>
-              {life}
-            </Typography>
-          </Box>
-          <Box>
-            <Button
-              onClick={minusLife}
-              onMouseDown={pressMinus}
-              onMouseUp={dropMinus}
-              onMouseLeave={dropMinus}
-            >
-              <TbArrowBadgeDownFilled size={40} />
-            </Button>
-          </Box>
-        </Stack>
+      <Stack flexGrow={1} justifyContent={"center"} alignItems={"center"}>
         <Stack
-          paddingY={1}
-          flexWrap={"nowrap"}
-          flexDirection={"row"}
+          flexGrow={1}
+          justifyContent={"center"}
           alignItems={"center"}
-          gap={0.5}
-          
+          sx={{
+            transform:
+              direction == "vertical"
+                ? inverse
+                  ? "rotate(270deg)"
+                  : "rotate(90deg)"
+                : undefined,
+          }}
         >
-          <FaVirus onClick={() => console.log("aaa")} /> <Typography variant="caption">2</Typography>
-          <GiDiceShield onClick={() => setLayerView("commanderDamage")} size={20}/>
+          <Stack
+            flexGrow={1}
+            justifyContent={"center"}
+            alignItems={"center"}
+            flexDirection={"row"}
+          >
+            <Box>
+              <Button
+                onClick={addLife}
+                onMouseDown={pressAdd}
+                onMouseUp={dropAdd}
+                onMouseLeave={dropAdd}
+                onTouchStart={pressAdd}
+                onTouchEnd={dropAdd}
+                sx={{ color: "gray" }}
+              >
+                <TbArrowBadgeLeftFilled size={40} />
+              </Button>
+            </Box>
+            <Box>
+              <Typography
+                variant="h1"
+                color={life && !deathByCommander ? "white" : "red"}
+                fontWeight={"bold"}
+                fontFamily={"monospace"}
+                sx={{ textShadow: "2px 2px black" }}
+              >
+                {life}
+              </Typography>
+            </Box>
+            <Box>
+              <Button
+                onClick={minusLife}
+                onMouseDown={pressMinus}
+                onMouseUp={dropMinus}
+                onMouseLeave={dropMinus}
+                onTouchStart={pressMinus}
+                onTouchEnd={dropMinus}
+                sx={{ color: "gray", textShadow: "2px 2px black" }}
+              >
+                <TbArrowBadgeRightFilled size={40} />
+              </Button>
+            </Box>
+          </Stack>
+          <Stack
+            paddingY={1}
+            flexWrap={"nowrap"}
+            flexDirection={"row"}
+            alignItems={"center"}
+            gap={0.5}
+          >
+            <FaVirus onClick={() => console.log("aaa")} />{" "}
+            <Typography variant="caption">2</Typography>
+            <GiDiceShield
+              onClick={() => setLayerView("commanderDamage")}
+              size={20}
+            />
+          </Stack>
         </Stack>
       </Stack>
     </>
