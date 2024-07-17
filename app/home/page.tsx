@@ -1,10 +1,10 @@
-import { Box, Button, Paper } from "@mui/material";
+import { Box, Button, Paper, Typography } from "@mui/material";
 
 const Home = () => {
   return (
     <>
       <Box component={Paper}>
-        <h1>home</h1>
+        <Typography>home</Typography>
         <Button variant="contained">Teste</Button>
       </Box>
     </>

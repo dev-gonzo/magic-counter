@@ -23,11 +23,12 @@ export default function RootLayout({
   return (
     <>
       <CssBaseline />
-      <ProviderTheme>
-        <html lang="pt-BR">
-          <body className={inter.className}>{children}</body>
-        </html>
-      </ProviderTheme>
+
+      <html lang="pt-BR">
+        <body className={inter.className}>
+          <ProviderTheme>{children}</ProviderTheme>
+        </body>
+      </html>
     </>
   );
 }
