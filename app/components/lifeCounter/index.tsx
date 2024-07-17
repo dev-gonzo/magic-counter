@@ -60,7 +60,7 @@ export const LifeCounter = ({ counter, direction, inverse, player: numerPlayer }
             </Box>
             <Box>
               <Typography
-                variant="h1"
+                variant="h3"
                 color={player?.life && !deathByCommander ? "white" : "red"}
                 fontWeight={"bold"}
                 fontFamily={"monospace"}
