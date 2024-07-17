@@ -1,8 +1,9 @@
 import { Stack } from "@mui/material";
 import { Bar } from "./bar";
 import { CounterIndividual } from "../counterIndividual";
+import { Props } from "./types";
 
-export const EightPlayers = () => {
+export const EightPlayers = ({ setReload, reload }: Props) => {
   return (
     <>
       <Stack
@@ -11,6 +12,7 @@ export const EightPlayers = () => {
         maxHeight={"100vh"}
         padding={0.5}
         gap={1}
+        key={`stack-eight-${reload}`}
       >
         <Stack
           flexGrow={1}
@@ -59,9 +61,9 @@ export const EightPlayers = () => {
             flexGrow={1}
             borderRadius={5}
             sx={{
-                backgroundImage: `url(../../assets/thb-250-plains.jpg)`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
+              backgroundImage: `url(../../assets/thb-250-plains.jpg)`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
             }}
           >
             <CounterIndividual
@@ -74,9 +76,9 @@ export const EightPlayers = () => {
             flexGrow={1}
             borderRadius={5}
             sx={{
-                backgroundImage: `url(../../assets/thb-250-plains.jpg)`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
+              backgroundImage: `url(../../assets/thb-250-plains.jpg)`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
             }}
           >
             <CounterIndividual
@@ -86,7 +88,7 @@ export const EightPlayers = () => {
             />
           </Stack>
         </Stack>
-        <Bar />
+        <Bar setReload={setReload} />
 
         <Stack
           flexGrow={1}
@@ -98,9 +100,9 @@ export const EightPlayers = () => {
             flexGrow={1}
             borderRadius={5}
             sx={{
-                backgroundImage: `url(../../assets/thb-250-plains.jpg)`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
+              backgroundImage: `url(../../assets/thb-250-plains.jpg)`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
             }}
           >
             <CounterIndividual
@@ -113,9 +115,9 @@ export const EightPlayers = () => {
             flexGrow={1}
             borderRadius={5}
             sx={{
-                backgroundImage: `url(../../assets/thb-250-plains.jpg)`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
+              backgroundImage: `url(../../assets/thb-250-plains.jpg)`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
             }}
           >
             <CounterIndividual
@@ -135,9 +137,9 @@ export const EightPlayers = () => {
             flexGrow={1}
             borderRadius={5}
             sx={{
-                backgroundImage: `url(../../assets/thb-250-plains.jpg)`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
+              backgroundImage: `url(../../assets/thb-250-plains.jpg)`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
             }}
           >
             <CounterIndividual
@@ -150,9 +152,9 @@ export const EightPlayers = () => {
             flexGrow={1}
             borderRadius={5}
             sx={{
-                backgroundImage: `url(../../assets/thb-250-plains.jpg)`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
+              backgroundImage: `url(../../assets/thb-250-plains.jpg)`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
             }}
           >
             <CounterIndividual
@@ -162,8 +164,6 @@ export const EightPlayers = () => {
             />
           </Stack>
         </Stack>
-    
-     
       </Stack>
     </>
   );

@@ -1,3 +1,4 @@
 export type Props = {
-    players: number
-} 
+  setReload: Function;
+  reload?: number;
+};

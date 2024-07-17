@@ -1,33 +1,39 @@
 import { InfoPlayer } from "../types";
 
-export const registredPlayers = () => {
+export const registredPlayers = (
+  playerNumber: number,
+  forced: boolean = false
+) => {
   const sessionPlayers: null | undefined | string =
-    sessionStorage.getItem("players");
+    localStorage.getItem("players");
 
-  if (!sessionPlayers && sessionPlayers == null) {
-    sessionStorage.setItem(
-      "players",
-      JSON.stringify([
-        {
-          player: 1,
-          life: 40,
-          commanderDamage: [0, 0, 0, 0, 0, 0, 0, 0],
-          infect: 0,
-        },
-        {
-          player: 2,
-          life: 20,
-          commanderDamage: [0, 0, 0, 0, 0, 0, 0, 0],
-          infect: 0,
-        },
-      ])
-    );
+  let current = 0;
+
+  if (sessionPlayers && sessionPlayers !== null) {
+    const infoPlayers: InfoPlayer[] = JSON.parse(sessionPlayers);
+
+    current = infoPlayers?.length;
+  }
+
+  if (playerNumber != current || forced) {
+    let players = [];
+
+    for (let i = 0; i < playerNumber; i++) {
+      players.push({
+        player: i + 1,
+        life: 40,
+        commanderDamage: [0, 0, 0, 0, 0, 0, 0, 0],
+        infect: 0,
+      });
+    }
+
+    localStorage.setItem("players", JSON.stringify(players));
   }
 };
 
 export const updateRegistredPlayers = (dataUpdate: InfoPlayer) => {
   const sessionPlayers: null | undefined | string =
-    sessionStorage.getItem("players");
+    localStorage.getItem("players");
 
   if (sessionPlayers && sessionPlayers !== null) {
     const infoPlayers: InfoPlayer[] = JSON.parse(sessionPlayers);
@@ -38,15 +44,13 @@ export const updateRegistredPlayers = (dataUpdate: InfoPlayer) => {
 
     infoPlayers[indexPlayer] = dataUpdate;
 
-    sessionStorage.setItem("players", JSON.stringify(infoPlayers));
+    localStorage.setItem("players", JSON.stringify(infoPlayers));
   }
 };
 
-export const cleanRegistredPlayers = () => {};
-
 export const getRegistredPlayers = (playerNumber: number): InfoPlayer => {
   const sessionPlayers: null | undefined | string =
-    sessionStorage.getItem("players");
+    localStorage.getItem("players");
 
   if (sessionPlayers && sessionPlayers !== null) {
     const infoPlayers: InfoPlayer[] = JSON.parse(sessionPlayers);
@@ -64,4 +68,17 @@ export const getRegistredPlayers = (playerNumber: number): InfoPlayer => {
     commanderDamage: [0, 0, 0, 0, 0, 0, 0, 0],
     infect: 0,
   } as InfoPlayer;
+};
+
+export const getRegistredQtd = (): number => {
+  const sessionPlayers: null | undefined | string =
+    localStorage.getItem("players");
+
+  if (sessionPlayers && sessionPlayers !== null) {
+    const infoPlayers: InfoPlayer[] = JSON.parse(sessionPlayers);
+
+    return infoPlayers?.length - 1;
+  }
+
+  return 2;
 };

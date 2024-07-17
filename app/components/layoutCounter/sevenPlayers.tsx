@@ -1,8 +1,9 @@
 import { Stack } from "@mui/material";
 import { Bar } from "./bar";
 import { CounterIndividual } from "../counterIndividual";
+import { Props } from "./types";
 
-export const SevenPlayers = () => {
+export const SevenPlayers = ({setReload, reload}:  Props) => {
   return (
     <>
       <Stack
@@ -11,6 +12,7 @@ export const SevenPlayers = () => {
         maxHeight={"100vh"}
         padding={0.5}
         gap={1}
+        key={`stack-seven-${reload}`}
       >
         <Stack
           flexGrow={1}
@@ -86,7 +88,7 @@ export const SevenPlayers = () => {
             />
           </Stack>
         </Stack>
-        <Bar />
+        <Bar setReload={setReload}/>
 
         <Stack
           flexGrow={1}

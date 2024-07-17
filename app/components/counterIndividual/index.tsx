@@ -16,12 +16,15 @@ export const CounterIndividual = ({ direction, inverse, player }: Props) => {
   return (
     <>
       {counter?.layerView == "life" ? (
+        <>
+      
         <LifeCounter
           counter={counter}
           direction={direction}
           inverse={inverse}
           player={player}
         />
+        </>
       ) : (
         <CommanderDamage counter={counter} />
       )}
