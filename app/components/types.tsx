@@ -15,5 +15,7 @@ export type Counter = {
   addCommanderDamage: (index: number) => void;
   minusCommanderDamage: (index: number) => void;
   commanderDamage: number[];
-  deathByCommander: boolean
+  deathByCommander: boolean;
+  playerDeath: boolean;
+  revivePlayer: () => void
 };

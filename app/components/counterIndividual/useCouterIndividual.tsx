@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Layers } from "../types";
 
 export const useCouterIndividual = () => {
@@ -11,6 +11,11 @@ export const useCouterIndividual = () => {
   const [commanderDamage, setCommanderDamage] = useState<number[]>([
     0, 0, 0, 0, 0, 0, 0, 0,
   ]);
+  const [playerDeath, setPlayerDeath] = useState(false);
+
+  const revivePlayer = () => {
+    setPlayerDeath(false)
+  }
 
   const deathByCommander = commanderDamage?.filter((item) => item === 21).length
     ? true
@@ -80,6 +85,16 @@ export const useCouterIndividual = () => {
     }
   };
 
+  useEffect(() => {
+    setTimeout(() => {
+      if(!life || deathByCommander){
+        setPlayerDeath(true)
+      }
+    }, 2000)
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [life, commanderDamage])
+
   return {
     life,
     addLife,
@@ -94,5 +109,7 @@ export const useCouterIndividual = () => {
     addCommanderDamage,
     minusCommanderDamage,
     deathByCommander,
+    playerDeath,
+    revivePlayer
   };
 };

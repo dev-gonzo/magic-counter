@@ -4,6 +4,8 @@ import { Box, Button, Stack, Typography } from "@mui/material";
 import { GiDiceShield } from "react-icons/gi";
 import { TbArrowBadgeDownFilled, TbArrowBadgeUpFilled } from "react-icons/tb";
 import { Counter } from "../types";
+import { FaVirus } from "react-icons/fa";
+
 
 export const LifeCounter = ({ counter }: { counter: Counter }) => {
   const {
@@ -61,9 +63,10 @@ export const LifeCounter = ({ counter }: { counter: Counter }) => {
           flexDirection={"row"}
           alignItems={"center"}
           gap={0.5}
-          onClick={() => setLayerView("commanderDamage")}
+          
         >
-          <GiDiceShield /> <Typography variant="caption">2</Typography>
+          <FaVirus onClick={() => console.log("aaa")} /> <Typography variant="caption">2</Typography>
+          <GiDiceShield onClick={() => setLayerView("commanderDamage")} size={20}/>
         </Stack>
       </Stack>
     </>
