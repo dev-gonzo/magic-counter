@@ -6,7 +6,12 @@ import { LifeCounter } from "../lifeCounter";
 import { Props } from "./types";
 import { useCouterIndividual } from "./useCouterIndividual";
 
-export const CounterIndividual = ({ direction, inverse, player }: Props) => {
+export const CounterIndividual = ({
+  direction,
+  inverse,
+  player,
+  outerConter,
+}: Props) => {
   const counter = useCouterIndividual(player);
 
   if (counter?.playerDeath) {
@@ -17,13 +22,13 @@ export const CounterIndividual = ({ direction, inverse, player }: Props) => {
     <>
       {counter?.layerView == "life" ? (
         <>
-      
-        <LifeCounter
-          counter={counter}
-          direction={direction}
-          inverse={inverse}
-          player={player}
-        />
+          <LifeCounter
+            counter={counter}
+            direction={direction}
+            inverse={inverse}
+            player={player}
+            outerConter={outerConter}
+          />
         </>
       ) : (
         <CommanderDamage counter={counter} />
